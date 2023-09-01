@@ -1,6 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+
 plugins {
+    id("com.github.ben-manes.versions") version "0.47.0"
     id("org.springframework.boot") version "3.1.3"
     id("io.spring.dependency-management") version "1.1.3"
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
@@ -11,7 +13,7 @@ plugins {
 }
 
 group = "com.tiarebalbi.infinitic"
-version = "0.0.1-SNAPSHOT"
+version = "1.0.0"
 extra["infiniticVersion"] = "0.11.6"
 
 val bootJar: org.springframework.boot.gradle.tasks.bundling.BootJar by tasks
@@ -22,6 +24,19 @@ jar.enabled = true
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
+    withSourcesJar()
+
+    manifest {
+        attributes["Automatic-Module-Name"] = "com.tiarebalbi.infinitic.spring-boot-3-starter"
+        attributes["Build-Timestamp"] = project.version
+        attributes["Build-Version"] = project.version
+        attributes["Implementation-Version"] = project.extra["infiniticVersion"]
+        attributes["Created-By"] = "Gradle ${gradle.gradleVersion}"
+        attributes["Build-Jdk"] =
+            "${System.getProperty("java.version")} (${System.getProperty("java.vendor")} ${System.getProperty("java.vm.version")})"
+        attributes["Build-OS"] =
+            "${System.getProperty("os.name")} (${System.getProperty("or.arch")} ${System.getProperty("or.version")})"
+    }
 }
 
 repositories {
@@ -50,4 +65,57 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/tiarebalbi/infinitic-spring-boot-integration")
+            credentials {
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+            }
+        }
+    }
+
+    publications {
+        register<MavenPublication>("gpr") {
+            setVersion(project.version)
+            from(components["java"])
+            pom {
+                name = "Infinitic Spring Boot 3 Starter"
+                description =
+                    "This repository provides an auto-configuration integration with Spring Boot for the Infinitic library, which is designed to orchestrate services distributed on multiple servers, built on top of Apache Pulsar. With Infinitic, you can easily manage complex scenarios, ensuring that failures don't disrupt your workflows."
+                url = "https://github.com/tiarebalbi/infinitic-spring-boot-integration"
+
+                licenses {
+                    license {
+                        name = "Apache License 2.0"
+                        url = "https://github.com/tiarebalbi/infinitic-spring-boot-integration/blob/main/LICENSE"
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = "tiarebalbi"
+                        name = "Tiare Balbi Bonamini"
+                        email = "me@tiarebalbi.com"
+                    }
+                }
+
+                scm {
+                    connection = "scm:git:git://github.com/tiarebalbi/infinitic-spring-boot-integration.git"
+                    developerConnection = "scm:git@github.com:tiarebalbi/infinitic-spring-boot-integration.git"
+                    url = "https://github.com/tiarebalbi/infinitic-spring-boot-integration.git"
+                }
+
+                versionMapping {
+                    usage("java-runtime") {
+                        fromResolutionResult()
+                    }
+                }
+            }
+        }
+    }
 }
