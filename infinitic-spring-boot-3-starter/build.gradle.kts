@@ -1,3 +1,4 @@
+
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
@@ -6,6 +7,7 @@ plugins {
     id("org.springframework.boot") version "3.1.3"
     id("io.spring.dependency-management") version "1.1.3"
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
+    id("org.jetbrains.dokka") version "1.8.20"
     kotlin("jvm") version "1.9.10"
     kotlin("plugin.spring") version "1.9.10"
     `java-library`
@@ -22,10 +24,10 @@ bootJar.enabled = false
 
 val jar: Jar by tasks
 jar.enabled = true
+jar.archiveClassifier.set("")
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
-    withSourcesJar()
 
     manifest {
         attributes["Automatic-Module-Name"] = "com.tiarebalbi.infinitic.spring-boot-3-starter"
@@ -38,6 +40,10 @@ java {
         attributes["Build-OS"] =
             "${System.getProperty("os.name")} (${System.getProperty("or.arch")} ${System.getProperty("or.version")})"
     }
+}
+
+artifacts {
+    archives(jar)
 }
 
 repositories {
@@ -68,6 +74,16 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+val sourcesJar by tasks.creating(Jar::class) {
+    archiveClassifier.set("sources")
+    from(sourceSets.main.map { it.allSource })
+}
+
+val javadocJar by tasks.creating(Jar::class) {
+    archiveClassifier.set("javadoc")
+    from(tasks.javadoc)
+}
+
 publishing {
     publications {
         repositories {
@@ -84,6 +100,9 @@ publishing {
         register<MavenPublication>("mavenJava") {
             setVersion(project.version)
             from(components["java"])
+            artifact(sourcesJar)
+            artifact(javadocJar)
+
             pom {
                 name = "Infinitic Spring Boot 3 Starter"
                 description =
@@ -92,6 +111,7 @@ publishing {
                 packaging = "jar"
 
                 signing {
+                    sign(configurations.archives.name)
                     sign(publishing.publications["mavenJava"])
                 }
 
