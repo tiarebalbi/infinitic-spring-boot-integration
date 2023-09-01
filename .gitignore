@@ -7,6 +7,11 @@ build/
 .idea/
 data/
 
+gradle.properties
+infinitic-spring-boot-3-starter/secret-key.gpg
+
+.env
+
 generated/
 
 ### STS ###

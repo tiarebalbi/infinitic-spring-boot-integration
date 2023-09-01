@@ -10,6 +10,7 @@ plugins {
     kotlin("plugin.spring") version "1.9.10"
     `java-library`
     `maven-publish`
+    `signing`
 }
 
 group = "com.tiarebalbi.infinitic"
@@ -68,19 +69,19 @@ tasks.withType<Test> {
 }
 
 publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/tiarebalbi/infinitic-spring-boot-integration")
-            credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+    publications {
+        repositories {
+            maven {
+                name = "OSSRH"
+                url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+                credentials {
+                    username = project.findProperty("ossrhUsername") as String? ?: System.getenv("USERNAME")
+                    password = project.findProperty("ossrhPassword") as String? ?: System.getenv("TOKEN")
+                }
             }
         }
-    }
 
-    publications {
-        register<MavenPublication>("gpr") {
+        register<MavenPublication>("mavenJava") {
             setVersion(project.version)
             from(components["java"])
             pom {
@@ -88,6 +89,11 @@ publishing {
                 description =
                     "This repository provides an auto-configuration integration with Spring Boot for the Infinitic library, which is designed to orchestrate services distributed on multiple servers, built on top of Apache Pulsar. With Infinitic, you can easily manage complex scenarios, ensuring that failures don't disrupt your workflows."
                 url = "https://github.com/tiarebalbi/infinitic-spring-boot-integration"
+                packaging = "jar"
+
+                signing {
+                    sign(publishing.publications["mavenJava"])
+                }
 
                 licenses {
                     license {
