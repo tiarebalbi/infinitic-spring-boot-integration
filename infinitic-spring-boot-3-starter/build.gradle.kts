@@ -3,8 +3,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 plugins {
+    id("org.springframework.boot") version "3.1.4"
     id("com.github.ben-manes.versions") version "0.48.0"
-    id("org.springframework.boot") version "3.1.3"
+
     id("io.spring.dependency-management") version "1.1.3"
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
     id("org.jetbrains.dokka") version "1.9.0"
@@ -16,7 +17,7 @@ plugins {
 }
 
 group = "com.tiarebalbi.infinitic"
-version = "1.0.0"
+version = "1.0.1"
 extra["infiniticVersion"] = "0.11.6"
 
 val bootJar: org.springframework.boot.gradle.tasks.bundling.BootJar by tasks
@@ -48,6 +49,12 @@ artifacts {
 
 repositories {
     mavenCentral()
+}
+
+configurations {
+    compileOnly {
+        extendsFrom(configurations.annotationProcessor.get())
+    }
 }
 
 dependencies {
