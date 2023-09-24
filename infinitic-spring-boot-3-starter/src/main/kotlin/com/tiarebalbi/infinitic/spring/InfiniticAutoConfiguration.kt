@@ -6,6 +6,7 @@ import io.infinitic.workers.InfiniticWorker
 import io.infinitic.workers.config.WorkerConfig
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.InitializingBean
+import org.springframework.boot.autoconfigure.AutoConfiguration
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.boot.context.properties.EnableConfigurationProperties
@@ -45,6 +46,7 @@ import org.springframework.core.io.ResourceLoader
  * @param resourceLoader the ResourceLoader object used to load the client configuration file
  * @author tiare.balbi
  */
+@AutoConfiguration
 @Configuration
 @ConditionalOnProperty(
     name = ["infinitic.enabled"],
