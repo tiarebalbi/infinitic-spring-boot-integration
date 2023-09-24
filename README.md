@@ -14,7 +14,7 @@ your workflows.
 <dependency>
     <groupId>com.tiarebalbi.infinitic</groupId>
     <artifactId>infinitic-spring-boot-3-starter</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
