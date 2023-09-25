@@ -9,14 +9,23 @@ your workflows.
 
 **Installation:** Add the Infinitic dependency to your pom.xml or build.gradle file.
 
+**Maven**
 ```xml
-<!-- Example for Maven -->
 <dependency>
     <groupId>com.tiarebalbi.infinitic</groupId>
     <artifactId>infinitic-spring-boot-3-starter</artifactId>
     <version>1.0.1</version>
 </dependency>
 ```
+
+**Gradle (Kotlin)**
+```xml
+implementation("com.tiarebalbi.infinitic:infinitic-spring-boot-3-starter:1.0.1")
+```
+
+Other references here: 
+https://central.sonatype.com/artifact/com.tiarebalbi.infinitic/infinitic-spring-boot-3-starter
+
 
 **Configuration:** Configure the Infinitic integration in your Spring Boot application's configuration files.
 
