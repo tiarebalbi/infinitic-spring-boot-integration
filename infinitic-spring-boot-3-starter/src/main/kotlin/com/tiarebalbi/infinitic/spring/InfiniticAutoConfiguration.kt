@@ -50,29 +50,30 @@ import org.springframework.core.io.ResourceLoader
 @Configuration
 @ConditionalOnProperty(
     name = ["infinitic.enabled"],
-    havingValue = "true"
+    havingValue = "true",
 )
 @EnableConfigurationProperties(InfiniticProperties::class)
 class InfiniticAutoConfiguration(
     private val properties: InfiniticProperties,
-    private val resourceLoader: ResourceLoader
+    private val resourceLoader: ResourceLoader,
 ) {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     @Bean
     @ConditionalOnProperty(name = ["infinitic.worker.enabled"], havingValue = "true")
     @ConditionalOnMissingBean
-    fun configureWorker() = InitializingBean {
-        val config = getWorkerConfig()
-        InfiniticWorker.fromConfig(config).use {
-            logger.info("Starting infinitic worker")
-            if (properties.worker.executionMode.isAsync()) {
-                it.startAsync()
-            } else {
-                it.start()
+    fun configureWorker() =
+        InitializingBean {
+            val config = getWorkerConfig()
+            InfiniticWorker.fromConfig(config).use {
+                logger.info("Starting infinitic worker")
+                if (properties.worker.executionMode.isAsync()) {
+                    it.startAsync()
+                } else {
+                    it.start()
+                }
             }
         }
-    }
 
     @Bean
     @ConditionalOnProperty(name = ["infinitic.client.enabled"], havingValue = "true")
@@ -91,8 +92,9 @@ class InfiniticAutoConfiguration(
     }
 
     private fun getWorkerConfig(): WorkerConfig {
-        val configuration = properties.worker.configuration
-            ?: throw IllegalStateException("Unable to find worker infinitic configuration")
+        val configuration =
+            properties.worker.configuration
+                ?: throw IllegalStateException("Unable to find worker infinitic configuration")
         val configurationFile = resourceLoader.getResource(configuration)
         return WorkerConfig.fromFile(configurationFile.file.absolutePath)
     }

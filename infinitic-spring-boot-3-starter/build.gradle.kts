@@ -1,16 +1,15 @@
-
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 plugins {
-    id("org.springframework.boot") version "3.1.5"
+    id("org.springframework.boot") version "3.2.0"
     id("com.github.ben-manes.versions") version "0.50.0"
 
     id("io.spring.dependency-management") version "1.1.4"
-    id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
+    id("org.jlleitschuh.gradle.ktlint") version "12.0.2"
     id("org.jetbrains.dokka") version "1.9.10"
-    kotlin("jvm") version "1.9.20"
-    kotlin("plugin.spring") version "1.9.20"
+    kotlin("jvm") version "1.9.21"
+    kotlin("plugin.spring") version "1.9.21"
     `java-library`
     `maven-publish`
     `signing`
@@ -18,7 +17,7 @@ plugins {
 
 group = "com.tiarebalbi.infinitic"
 version = "1.0.1"
-extra["infiniticVersion"] = "0.11.6"
+extra["infiniticVersion"] = "0.11.7"
 
 val bootJar: org.springframework.boot.gradle.tasks.bundling.BootJar by tasks
 bootJar.enabled = false
@@ -113,7 +112,12 @@ publishing {
             pom {
                 name = "Infinitic Spring Boot 3 Starter"
                 description =
-                    "This repository provides an auto-configuration integration with Spring Boot for the Infinitic library, which is designed to orchestrate services distributed on multiple servers, built on top of Apache Pulsar. With Infinitic, you can easily manage complex scenarios, ensuring that failures don't disrupt your workflows."
+                    """
+                    This repository provides an auto-configuration integration with Spring Boot for the 
+                    Infinitic library, which is designed to orchestrate services distributed on multiple servers, 
+                    built on top of Apache Pulsar. With Infinitic, you can easily manage complex scenarios, ensuring 
+                    that failures don't disrupt your workflows.
+                """.trim()
                 url = "https://github.com/tiarebalbi/infinitic-spring-boot-integration"
                 packaging = "jar"
 

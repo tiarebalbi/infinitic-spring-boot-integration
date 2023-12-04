@@ -5,6 +5,11 @@ Spring Boot for the Infinitic library, which is designed to orchestrate services
 on top of Apache Pulsar. With Infinitic, you can easily manage complex scenarios, ensuring that failures don't disrupt
 your workflows.
 
+**Notes:**
+
+- **v1.0.x** is compatible with Infinitic v0.11.6 and Spring Boot 3.1.x
+- **v1.1.x** is compatible with Infinitic v0.11.7+ and Spring Boot 3.2.x
+
 ## Getting Started
 
 **Installation:** Add the Infinitic dependency to your pom.xml or build.gradle file.
@@ -14,13 +19,13 @@ your workflows.
 <dependency>
     <groupId>com.tiarebalbi.infinitic</groupId>
     <artifactId>infinitic-spring-boot-3-starter</artifactId>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
 **Gradle (Kotlin)**
 ```xml
-implementation("com.tiarebalbi.infinitic:infinitic-spring-boot-3-starter:1.0.1")
+implementation("com.tiarebalbi.infinitic:infinitic-spring-boot-3-starter:1.1.0")
 ```
 
 Other references here: 
