@@ -28,9 +28,8 @@ data class InfiniticProperties(
     /**
      * Represents the properties of a client.
      */
-    val client: ClientProperties = ClientProperties(enabled = true)
+    val client: ClientProperties = ClientProperties(enabled = true),
 ) : Serializable {
-
     /**
      * Represents the properties of a worker.
      *
@@ -43,18 +42,15 @@ data class InfiniticProperties(
          * The execution mode of the worker. The Default value is ExecutionMode.ASYNC.
          */
         val enabled: Boolean = true,
-
         /**
          * The execution mode for the initialization of the worker
          */
         val executionMode: ExecutionMode = ExecutionMode.ASYNC,
-
         /**
          * The configuration file for the worker.
          */
-        val configuration: String? = null
+        val configuration: String? = null,
     ) : Serializable {
-
         /**
          * Represents the execution mode of a process.
          *
@@ -64,7 +60,8 @@ data class InfiniticProperties(
          */
         enum class ExecutionMode {
             SYNC,
-            ASYNC;
+            ASYNC,
+            ;
 
             fun isAsync(): Boolean {
                 return this == ASYNC
@@ -86,6 +83,6 @@ data class InfiniticProperties(
         /**
          * The configuration file for the client.
          */
-        val configuration: String? = null
+        val configuration: String? = null,
     ) : Serializable
 }
