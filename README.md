@@ -5,11 +5,6 @@ Spring Boot for the Infinitic library, which is designed to orchestrate services
 on top of Apache Pulsar. With Infinitic, you can easily manage complex scenarios, ensuring that failures don't disrupt
 your workflows.
 
-**Notes:**
-
-- **v1.0.x** is compatible with Infinitic v0.11.6 and Spring Boot 3.1.x
-- **v1.1.x** is compatible with Infinitic v0.11.7+ and Spring Boot 3.2.x
-
 ## Compatibility
 
 | Spring Boot Version | Infinitic |
