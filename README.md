@@ -10,6 +10,14 @@ your workflows.
 - **v1.0.x** is compatible with Infinitic v0.11.6 and Spring Boot 3.1.x
 - **v1.1.x** is compatible with Infinitic v0.11.7+ and Spring Boot 3.2.x
 
+## Compatibility
+
+| Spring Boot Version | Infinitic |
+|---------------------|--------------|
+| 3.2.x               | 0.11.7+       |
+| 3.1.x               | 0.11.6          |
+
+
 ## Getting Started
 
 **Installation:** Add the Infinitic dependency to your pom.xml or build.gradle file.
