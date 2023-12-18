@@ -6,7 +6,7 @@ plugins {
     id("com.github.ben-manes.versions") version "0.50.0"
 
     id("io.spring.dependency-management") version "1.1.4"
-    id("org.jlleitschuh.gradle.ktlint") version "12.0.2"
+    id("org.jlleitschuh.gradle.ktlint") version "12.0.3"
     id("org.jetbrains.dokka") version "1.9.10"
     kotlin("jvm") version "1.9.21"
     kotlin("plugin.spring") version "1.9.21"
