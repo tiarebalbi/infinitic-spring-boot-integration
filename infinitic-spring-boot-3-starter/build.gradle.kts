@@ -17,7 +17,7 @@ plugins {
 
 group = "com.tiarebalbi.infinitic"
 version = "1.1.0"
-extra["infiniticVersion"] = "0.11.7"
+extra["infiniticVersion"] = "0.12.1"
 
 val bootJar: org.springframework.boot.gradle.tasks.bundling.BootJar by tasks
 bootJar.enabled = false
