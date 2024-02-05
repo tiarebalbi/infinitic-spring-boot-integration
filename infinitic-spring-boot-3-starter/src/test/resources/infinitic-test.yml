@@ -14,3 +14,10 @@ workflows:
   - name: annotatedWorkflow
     class: com.tiarebalbi.infinitic.tests.AnnotatedWorkflowImpl
     concurrency: 5
+
+workflowDefault:
+  concurrency: 5
+  timeoutInSeconds: 30
+  retry:
+    maximumRetries: 6
+  checkMode: strict

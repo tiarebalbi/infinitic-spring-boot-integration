@@ -1,6 +1,7 @@
 package com.tiarebalbi.example
 
 import com.tiarebalbi.example.demo.DemoService
+import io.infinitic.clients.InfiniticClient
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -18,7 +19,9 @@ fun main(args: Array<String>) {
 class Config {
 
     @Bean
-    fun initService(demoService: DemoService) = InitializingBean {
-        demoService.runDemoFlow()
+    fun initService(demoService: DemoService, client: InfiniticClient) = InitializingBean {
+        val execution = client.dispatch(demoService::runDemoFlow)
+        println("Execution id: ${execution.id}")
+        println("Result: ${execution.await()}")
     }
 }
