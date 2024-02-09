@@ -9,7 +9,7 @@ plugins {
 
 group = "com.tiarebalbi.example"
 version = "0.0.1-SNAPSHOT"
-extra["infiniticVersion"] = "0.11.6"
+extra["infiniticVersion"] = "0.11.7"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
