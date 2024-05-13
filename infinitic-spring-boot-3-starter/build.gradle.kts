@@ -5,11 +5,11 @@ plugins {
     id("org.springframework.boot") version "3.2.5"
     id("com.github.ben-manes.versions") version "0.51.0"
 
-    id("io.spring.dependency-management") version "1.1.4"
-    id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
+    id("io.spring.dependency-management") version "1.1.5"
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
     id("org.jetbrains.dokka") version "1.9.20"
-    kotlin("jvm") version "1.9.23"
-    kotlin("plugin.spring") version "1.9.23"
+    kotlin("jvm") version "1.9.24"
+    kotlin("plugin.spring") version "1.9.24"
     `java-library`
     `maven-publish`
     `signing`
